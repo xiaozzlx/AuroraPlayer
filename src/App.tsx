@@ -5,20 +5,46 @@ function App() {
     <div className="app">
       <header className="header">
         <h1>🎵 Aurora Player</h1>
-        <p>现代化跨平台音乐播放器</p>
+        <p>你的现代化在线音乐播放器</p>
       </header>
 
-      <main className="main">
-        <div className="card">
-          <h2>欢迎使用 Aurora Player</h2>
-          <p>播放器核心正在开发中...</p>
+      <main className="content">
+        <input
+          className="search"
+          type="text"
+          placeholder="🔍 搜索歌曲、歌手..."
+        />
 
-          <button>导入本地音乐</button>
-        </div>
+        <section className="list">
+          <h2>推荐音乐</h2>
+
+          <div className="song">
+            <span>七里香</span>
+            <span>周杰伦</span>
+          </div>
+
+          <div className="song">
+            <span>江南</span>
+            <span>林俊杰</span>
+          </div>
+
+          <div className="song">
+            <span>十年</span>
+            <span>陈奕迅</span>
+          </div>
+        </section>
       </main>
 
-      <footer className="footer">
-        <small>Version 0.0.1</small>
+      <footer className="player">
+        <button>⏮</button>
+        <button>▶</button>
+        <button>⏭</button>
+
+        <div className="progress">
+          <div className="bar"></div>
+        </div>
+
+        <span>00:00 / 03:45</span>
       </footer>
     </div>
   );
