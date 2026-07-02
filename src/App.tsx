@@ -1,51 +1,77 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 
+import Header from "./components/Header";
+import SearchBar from "./components/SearchBar";
+import SongList from "./components/SongList";
+import PlayerBar from "./components/PlayerBar";
+
 function App() {
-  return (
+ const songs = [
+  {
+    title: "七里香",
+    artist: "周杰伦",
+    file: "/music/demo.mp3",
+  },
+  {
+    title: "江南",
+    artist: "林俊杰",
+    file: "/music/demo.mp3",
+  },
+  {
+    title: "十年",
+    artist: "陈奕迅",
+    file: "/music/demo.mp3",
+  },
+];
+
+ const [currentIndex, setCurrentIndex] = useState(0);
+
+ const currentSong = songs[currentIndex];
+ const [currentTime, setCurrentTime] = useState(0);
+ const [duration, setDuration] = useState(0);
+ const [isPlaying, setIsPlaying] = useState(false);
+
+ const [audio] = useState(() => new Audio(songs[0].file));
+ useEffect(() => {
+  const updateTime = () => {
+    setCurrentTime(audio.currentTime);
+    setDuration(audio.duration || 0);
+  };
+
+  audio.addEventListener("timeupdate", updateTime);
+
+  return () => {
+    audio.removeEventListener("timeupdate", updateTime);
+  };
+}, [audio]);
+ return (
     <div className="app">
-      <header className="header">
-        <h1>🎵 Aurora Player</h1>
-        <p>你的现代化在线音乐播放器</p>
-      </header>
+      <Header />
 
       <main className="content">
-        <input
-          className="search"
-          type="text"
-          placeholder="🔍 搜索歌曲、歌手..."
-        />
+  <SearchBar />
+ <SongList
+  songs={songs}
+  currentSong={currentSong}
+  onSelectSong={(song) => {
+    const index = songs.findIndex(
+      (item) => item.title === song.title
+    );
 
-        <section className="list">
-          <h2>推荐音乐</h2>
+    setCurrentIndex(index);
+  }}
+/>
+</main>
 
-          <div className="song">
-            <span>七里香</span>
-            <span>周杰伦</span>
-          </div>
-
-          <div className="song">
-            <span>江南</span>
-            <span>林俊杰</span>
-          </div>
-
-          <div className="song">
-            <span>十年</span>
-            <span>陈奕迅</span>
-          </div>
-        </section>
-      </main>
-
-      <footer className="player">
-        <button>⏮</button>
-        <button>▶</button>
-        <button>⏭</button>
-
-        <div className="progress">
-          <div className="bar"></div>
-        </div>
-
-        <span>00:00 / 03:45</span>
-      </footer>
+  <PlayerBar
+  currentSong={currentSong}
+  audio={audio}
+  isPlaying={isPlaying}
+  setIsPlaying={setIsPlaying}
+  currentTime={currentTime}
+  duration={duration}
+/>
     </div>
   );
 }
