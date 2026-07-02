@@ -5,76 +5,106 @@
 }
 
 body {
-  font-family: "Microsoft YaHei", sans-serif;
   background: #111827;
   color: #ffffff;
+  font-family: "Segoe UI", sans-serif;
 }
 
 .app {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .header {
-  padding: 40px 20px;
+  padding: 28px;
   text-align: center;
-  border-bottom: 1px solid #2a2a2a;
+  border-bottom: 1px solid #2d3748;
 }
 
 .header h1 {
-  font-size: 42px;
-  margin-bottom: 10px;
+  font-size: 32px;
+  margin-bottom: 8px;
 }
 
 .header p {
   color: #9ca3af;
+}
+
+.content {
+  flex: 1;
+  padding: 24px;
+  overflow: auto;
+}
+
+.search {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #1f2937;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 24px;
+}
+
+.search:focus {
+  outline: 2px solid #3b82f6;
+}
+
+.list h2 {
+  margin-bottom: 16px;
+}
+
+.song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1f2937;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.song:hover {
+  background: #374151;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  border-top: 1px solid #2d3748;
+}
+
+.player button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
   font-size: 18px;
 }
 
-.main {
+.player button:hover {
+  background: #1d4ed8;
+}
+
+.progress {
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 6px;
+  background: #374151;
+  border-radius: 999px;
+  overflow: hidden;
 }
 
-.card {
-  width: 420px;
-  padding: 40px;
-  background: #1f2937;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,.3);
-}
-
-.card h2 {
-  margin-bottom: 15px;
-}
-
-.card p {
-  margin-bottom: 30px;
-  color: #cbd5e1;
-}
-
-button {
+.bar {
+  width: 35%;
+  height: 100%;
   background: #3b82f6;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 12px 24px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: .25s;
-}
-
-button:hover {
-  background: #2563eb;
-}
-
-.footer {
-  text-align: center;
-  padding: 20px;
-  color: #9ca3af;
-  border-top: 1px solid #2a2a2a;
 }
