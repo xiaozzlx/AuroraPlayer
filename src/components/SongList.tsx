@@ -1,8 +1,4 @@
-type Song = {
-  id: number;
-  title: string;
-  artist: string;
-};
+import type { Song } from "../types/song";
 
 type SongListProps = {
   songs: Song[];

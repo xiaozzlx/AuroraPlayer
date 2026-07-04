@@ -1,8 +1,4 @@
-type Song = {
-  title: string;
-  artist: string;
-  file: string;
-};
+import type { Song } from "../types/song";
 
 type PlayerBarProps = {
   currentSong: Song;
