@@ -7,8 +7,10 @@ type PlayerBarProps = {
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>;
   currentTime: number;
   duration: number;
-};
 
+  onPrevious: () => void;
+  onNext: () => void;
+};
 function formatTime(time: number) {
   if (!time || isNaN(time)) return "00:00";
 
@@ -25,6 +27,8 @@ function PlayerBar({
   setIsPlaying,
   currentTime,
   duration,
+  onPrevious,
+  onNext,
 }: PlayerBarProps) {
 
  const togglePlay = () => {
@@ -55,11 +59,13 @@ const progress =
 
   return (
     <footer className="player">
-      <button>⏮</button>
-     <button onClick={togglePlay}>
+      <button onClick={onPrevious}>⏮</button>
+
+<button onClick={togglePlay}>
   {isPlaying ? "⏸" : "▶"}
 </button>
-      <button>⏭</button>
+
+<button onClick={onNext}>⏭</button>
 
      <div
   className="progress"

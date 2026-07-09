@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-
+import { useEffect, useState } from "react";
 import "./App.css";
 
 import Header from "./components/Header";
@@ -9,55 +8,87 @@ import PlayerBar from "./components/PlayerBar";
 import { songs } from "./data/songs";
 
 function App() {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
- const [currentIndex, setCurrentIndex] = useState(0);
+  const currentSong = songs[currentIndex];
 
- const currentSong = songs[currentIndex];
- const [currentTime, setCurrentTime] = useState(0);
-const [duration, setDuration] = useState(0);
-const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-const [audio] = useState(() => new Audio(songs[0].file));
+  const [audio] = useState(() => new Audio(songs[0].file));
 
-useEffect(() => {
-  const updateTime = () => {
-    setCurrentTime(audio.currentTime);
-    setDuration(audio.duration || 0);
+  // 上一首
+  const previousSong = () => {
+    if (currentIndex === 0) {
+      setCurrentIndex(songs.length - 1);
+    } else {
+      setCurrentIndex(currentIndex - 1);
+    }
   };
 
-  audio.addEventListener("timeupdate", updateTime);
-
-  return () => {
-    audio.removeEventListener("timeupdate", updateTime);
+  // 下一首
+  const nextSong = () => {
+    if (currentIndex === songs.length - 1) {
+      setCurrentIndex(0);
+    } else {
+      setCurrentIndex(currentIndex + 1);
+    }
   };
-}, [audio]);
- return (
+
+  // 更新时间
+  useEffect(() => {
+    const updateTime = () => {
+      setCurrentTime(audio.currentTime);
+      setDuration(audio.duration || 0);
+    };
+
+    audio.addEventListener("timeupdate", updateTime);
+
+    return () => {
+      audio.removeEventListener("timeupdate", updateTime);
+    };
+  }, [audio]);
+
+  // 切歌
+  useEffect(() => {
+    audio.src = currentSong.file;
+
+    if (isPlaying) {
+      audio.play();
+    }
+  }, [currentSong, isPlaying, audio]);
+
+  return (
     <div className="app">
       <Header />
 
       <main className="content">
-  <SearchBar />
- <SongList
-  songs={songs}
-  currentSong={currentSong}
-  onSelectSong={(song) => {
-    const index = songs.findIndex(
-      (item) => item.title === song.title
-    );
+        <SearchBar />
 
-    setCurrentIndex(index);
-  }}
-/>
-</main>
+        <SongList
+          songs={songs}
+          currentSong={currentSong}
+          onSelectSong={(song) => {
+            const index = songs.findIndex(
+              (item) => item.title === song.title
+            );
 
-  <PlayerBar
-  currentSong={currentSong}
-  audio={audio}
-  isPlaying={isPlaying}
-  setIsPlaying={setIsPlaying}
-  currentTime={currentTime}
-  duration={duration}
-/>
+            setCurrentIndex(index);
+          }}
+        />
+      </main>
+
+      <PlayerBar
+        currentSong={currentSong}
+        audio={audio}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        currentTime={currentTime}
+        duration={duration}
+        onPrevious={previousSong}
+        onNext={nextSong}
+      />
     </div>
   );
 }
