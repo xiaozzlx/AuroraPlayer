@@ -115,3 +115,80 @@ docs/
 ├── 05_Design
 ├── 06_Releases
 └── 07_Research
+
+
+## 📚 Documentation
+
+Project documentation:
+
+- Project Vision
+- Engineering Principles
+- Architecture Specifications
+- Engine Catalog
+- System Architecture
+
+
+See:
+docs/
+
+
+# 🛠 Development
+
+
+## Requirements
+
+- Node.js
+- pnpm
+
+
+## Install
+
+```bash
+pnpm install
+Development
+pnpm dev
+Build
+pnpm build
+🗺 Roadmap
+
+Aurora is developed through incremental milestones.
+
+Current:
+Architecture Foundation
+        ↓
+Event System
+        ↓
+Audio Engine
+        ↓
+Visualization Engine
+        ↓
+Plugin System
+        ↓
+Aurora Alpha
+More details:
+docs/00_Project/ROADMAP.md
+🤝 Contributing
+
+Aurora welcomes contributions.
+
+Before contributing, please read:
+docs/00_Project/ENGINEERING_PRINCIPLES.md
+All contributions should respect:
+
+Clear documentation
+Stable architecture
+Verified behavior
+Long-term maintainability
+📄 License
+
+Aurora is released under the MIT License.
+
+See:
+LICENSE
+⭐ About Aurora
+
+Aurora aims to become a continuously evolving music experience platform.
+
+Not just a player.
+
+A living system.
