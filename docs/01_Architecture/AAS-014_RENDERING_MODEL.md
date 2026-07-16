@@ -1,6 +1,6 @@
 # AAS-014 Rendering Model
 
-> Status: Review
+> Status: Freeze
 >
 > Version: 1.0.0
 >
@@ -245,6 +245,36 @@ Present Frame
 
 The render loop SHOULD remain independent from audio processing.
 
+# 6.1 Rendering Thread Model
+
+
+Aurora SHOULD separate rendering execution from other system workloads.
+
+
+Example:
+
+Audio Thread
+|
+
+v
+Audio Feature Update
+
+Render Thread
+|
+
+v
+Frame Generation
+
+UI Thread
+|
+
+v
+User Interaction
+
+
+Threads SHOULD communicate through stable data exchange mechanisms.
+
+Direct dependency between threads SHOULD be avoided.
 
 # 7. Render Pipeline
 
@@ -311,6 +341,44 @@ Render passes SHOULD have:
 - Defined inputs
 - Defined outputs
 
+# 8.1 Render Graph Model
+
+
+Aurora rendering SHOULD support a Render Graph architecture.
+
+
+A Render Graph describes rendering operations as a dependency graph instead of a fixed sequence.
+
+
+Example:
+
+Scene Data
+|
+
+v
+Render Graph
+|
+
+├── Geometry Pass
+
+├── Lighting Pass
+
+├── Effect Pass
+
+└── Composition Pass
+
+|
+
+v
+Frame Output
+
+
+Render Graph allows:
+
+- Dynamic pipeline composition
+- Resource dependency tracking
+- GPU optimization
+- Future rendering evolution
 
 # 9. GPU Resource Model
 
@@ -504,6 +572,18 @@ Minimize:
 - Update delay
 - Render delay
 
+# 14.1 Frame Synchronization
+
+
+Rendering SHOULD provide synchronization mechanisms between:
+
+
+- Experience updates
+- Animation state
+- GPU frame generation
+
+
+Synchronization SHOULD maintain visual consistency without blocking real-time execution.
 
 # 15. Quality Scaling
 
