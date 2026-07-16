@@ -1,6 +1,6 @@
 # AAS-014 Rendering Model
 
-> Status: Freeze
+> Status: Review Complete
 >
 > Version: 1.0.0
 >
